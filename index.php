@@ -10,9 +10,11 @@
 		echo "JUHU, DATEN!";
 		$input = Form::auslesen();
 		echo "<hr>";
-		$ergebnisse = $hamming->run($input);
+		$ergebnisse = $hamming->run($input, 5);
 		foreach($ergebnisse as $ergebnis) {
-			echo $ergebnis['speise'].' '.$ergebnis['wert'].'<br>';
+			echo $ergebnis['speise'].'<br>'; 
+			// für Anzeige inklusive Zahlen:
+			//echo $ergebnis['speise'].' '.$ergebnis['wert'].'<br>';
 		}
 		echo "<hr>";
 	}

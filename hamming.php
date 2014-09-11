@@ -53,7 +53,7 @@ class Hamming {
 		echo "Hamming initalisiert<br>";
 	}
 	
-	public function run($input){
+	public function run($input, $anzahl = 5){
 		$summeGewichtung = 0;
 		foreach(Hamming::$attribute as $attribut) {
 			$summeGewichtung += $attribut['wert'];
@@ -75,7 +75,7 @@ class Hamming {
 		array_multisort($result, SORT_DESC, $this->data, SORT_ASC);
 		
 		$ergbnisse = array();
-		for($i= 0 ; $i < count($this->data) ; $i++ ) {
+		for($i= 0 ; $i < $anzahl ; $i++ ) {
 			$ergebnisse[$i]['speise'] = $this->data[$i]['ergebnis'];
 			$ergebnisse[$i]['wert'] = round($result[$i],2);
 		}
