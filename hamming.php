@@ -74,9 +74,12 @@ class Hamming {
 		//Elemente Sortieren:
 		array_multisort($result, SORT_DESC, $this->data, SORT_ASC);
 		
+		$ergbnisse = array();
 		for($i= 0 ; $i < count($this->data) ; $i++ ) {
-			echo $this->data[$i]['ergebnis'].' '.round($result[$i],2).'<br>';
+			$ergebnisse[$i]['speise'] = $this->data[$i]['ergebnis'];
+			$ergebnisse[$i]['wert'] = round($result[$i],2);
 		}
+		return $ergebnisse;
 	}
 }
 ?>
