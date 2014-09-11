@@ -2,6 +2,22 @@
 	include 'include/DB_Functions.php';
 	include 'hamming.php';
 	include 'form.php';
+	
+	$input = null;
+	$hamming = new Hamming();
+	$idee = "";
+	// Gibt es Daten vom Formular?
+	if (Form::datenGesendet()){
+		$input = Form::auslesen();
+		$ergebnisse = $hamming->run($input);
+		$index = rand(0,4);
+		$idee = '<h2>Unsere Idee: '.$ergebnisse[$index]['speise'].'</h2>';
+		//echo $index;
+		/*
+		foreach($ergebnisse as $ergebnis) {
+			echo $ergebnis['speise'].' '.$ergebnis['wert'].'<br>';
+		}*/
+	}				
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -29,17 +45,7 @@
 			<div class="col-md-8 col-md-offset-2 panel" style="padding:20px">
 				<h1>Rezeptvorschlag</h1>
 				<?php
-					$input = null;
-					$hamming = new Hamming();
-					// Gibt es Daten vom Formular?
-					if (Form::datenGesendet()){
-						$input = Form::auslesen();
-						$ergebnisse = $hamming->run($input);
-						foreach($ergebnisse as $ergebnis) {
-							echo $ergebnis['speise'].' '.$ergebnis['wert'].'<br>';
-						}
-					}				
-					
+					echo $idee;					
 					Form::create($input);
 				?>
 			</div>
