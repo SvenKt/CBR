@@ -5,7 +5,7 @@ class Hamming {
 	public static $attribute = array(
 		array(
 			'spalte' => 'warm',
-			'title' => "Wie ist es drauﬂen?", 
+			'title' => "Wie ist es drau√üen?", 
 			"select" => array('Warm', 'Kalt'),
 			'wert' => 1
 		),
@@ -36,13 +36,13 @@ class Hamming {
 		array(
 			'spalte' => 'vegetarisch',
 			'title' => "Was Vegetarisches?", 
-			"select" => array('jo', 'B‰h, nein danke!'),
+			"select" => array('jo', 'B√§h, nein danke!'),
 			'wert' => 1
 		),
 		array(
 			'spalte' => 'kochen',
 			'title' => "Kannst du Kochen?", 
-			"select" => array('Ja', 'Ja, Tiefk¸hlpizza'),
+			"select" => array('Ja', 'Ja, Tiefk√ºhlpizza'),
 			'wert' => 2
 		)
 	);
@@ -50,7 +50,6 @@ class Hamming {
 	public function __construct(){
 		$db = new DB_Functions();
 		$this->data = $db->getSpeisen();
-		echo "Hamming initalisiert<br>";
 	}
 	
 	public function run($input){
@@ -61,7 +60,7 @@ class Hamming {
 	
 		$result = array();
 		foreach($this->data as $entry) {
-			$i = 0; 			//z‰hlvariable i
+			$i = 0; 			//z√§hlvariable i
 			$diff = 0; 			//differenz zwischen 0 und 1 der einzelnen attribute
 			$calc_result = '';	//deklarierung der 'calcultaion-result' variable (hamming ergebnis)
 			foreach(Hamming::$attribute as $attribut) {
