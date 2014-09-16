@@ -77,6 +77,7 @@ class Hamming {
 		for($i= 0 ; $i < $anzahl ; $i++ ) {
 			$ergebnisse[$i]['speise'] = $this->data[$i]['ergebnis'];
 			$ergebnisse[$i]['wert'] = round($result[$i],2);
+			$ergebnisse[$i]['flickr'] = $this->data[$i]['flickr'];
 		}
 		return $ergebnisse;
 	}

@@ -2,6 +2,7 @@
 	include 'include/DB_Functions.php';
 	include 'hamming.php';
 	include 'form.php';
+	include 'flickr.php';
 	
 	$input = null;
 	$hamming = new Hamming();
@@ -20,7 +21,20 @@
 	}				
 ?>
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" 
+	<?php
+	if($ergebnisse[$index]['flickr'] == null) {
+		$ergebnisse[$index]['flickr'] = '6122735488';
+	}
+	$flickr = new Flickr($ergebnisse[$index]['flickr']);
+	echo 'style="background: url('.$flickr->getImage().') no-repeat center center fixed; 
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;"';
+	$author = $flickr->getAuthor();
+	?>
+>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -48,6 +62,8 @@
 					echo $idee;					
 					Form::create($input);
 				?>
+				<hr>
+				<p><small><a href="<?php echo $author['linkPicture']; ?>">Background picture by <?php echo $author['username']; ?> @flickr</a>. Used under Creative Commons - Attribution.</small></p>
 			</div>
 		</div>		
 	</div>

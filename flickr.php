@@ -13,12 +13,15 @@ class Flickr {
 	}
 	
 	function getAuthor() {
-		$author = $this->erzeugeAnfrage('flickr.photos.getInfo')['photo']['owner'];
+		$infos = $this->erzeugeAnfrage('flickr.photos.getInfo')['photo'];		
+		$author = $infos['owner'];
+		$link_picture = $infos['urls']['url'][0]['_content'];
+		
 		$result['username'] = $author['username'];
-		$result['path_alias'] = $author['path_alias'];
-		$result['link'] = 'https://www.flickr.com/photos/'.$author['path_alias'];
+		$result['linkPicture'] = $link_picture;
 		return $result;
 	}
+	
 	
 	
 	private function erzeugeAnfrage($method){
