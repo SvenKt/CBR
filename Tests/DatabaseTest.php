@@ -9,7 +9,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 		foreach(Hamming::$attribute as $attribut) {
 			$input[$attribut['spalte']] = 0;
 		}	
-		$this->asserTrue($db->addSpeise($input, "Test"), 'Speisen konnten nicht hinzugefügt werden.');
+		$this->assertTrue($db->addSpeise($input, "Test"), 'Speisen konnten nicht hinzugefügt werden.');
 	}
 	
 }
