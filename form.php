@@ -13,12 +13,36 @@ class Form {
 			echo '</select><br>';
 			echo '</div></div>';
 		}
-		echo '<button type="submit" class="btn btn-success">Submit</button>';
-		echo '</form>';
+		echo '<table width=100%>
+			<tr>
+				<td width =10%>
+					<button type="submit" class="btn btn-success" name="hamming">Submit</button>
+				</td>
+				<td width=90%>
+						<button type="submit" class="btn btn-warning" name="newSpeise">Oder Speise einfügen!</button>
+					
+				</td>
+			</tr>
+			</table>
+			</form>
+			';
 	}
-	
+		
 	public static function datenGesendet(){
-		return ($_SERVER['REQUEST_METHOD'] === 'POST') ;
+		
+		if($_SERVER['REQUEST_METHOD'] === 'POST'){
+			if(isset($_POST['addSpeise'])){
+				return "addSpeise";
+			}
+			if(isset($_POST['hamming'])){
+				return "hamming";
+			}
+			if(isset($_POST['newSpeise'])){
+				return 'newSpeise';
+			}
+		}
+		return null;
+		
 	}
 	
 	public static function auslesen() {

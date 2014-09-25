@@ -28,5 +28,14 @@ class DB_Functions {
 		}
 		return $speisen;
 	}
+	
+	public function addSpeise($input, $neuesRezept){
+		$sql = "INSERT INTO ".DB_TABLE." VALUES (";
+		foreach(Hamming::$attribute as $attribut) {
+			$sql.=$input[$attribut['spalte']]." , ";
+		}
+		$sql.=$neuesRezept.");";
+		echo $sql;
+	}
 }	
 ?>

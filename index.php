@@ -3,6 +3,7 @@
 	include 'hamming.php';
 	include 'form.php';
 	include 'flickr.php';
+	include 'submit.php';
 	
 	//noch keine Formulardaten
 	$input = null;
@@ -11,18 +12,35 @@
 	//rezeptidee leer
 	$idee = "";
 	// Gibt es Daten vom Formular?
-	$ergebnisse = null;
-	$index = 0;
-	if (Form::datenGesendet()){
-		$input = Form::auslesen();
-		$ergebnisse = $hamming->run($input);
-		$index = rand(0,4);
-		$idee = '<h2>Unsere Idee: '.$ergebnisse[$index]['speise'].'</h2>';
-	}				
+	$aktion = Form::datenGesendet();
+	switch ($aktion){
+		case "hamming":
+			$input = Form::auslesen();
+			$ergebnisse = $hamming->run($input);
+			$index = rand(0,4);
+			$idee = '<h2>Unsere Idee: '.$ergebnisse[$index]['speise'].'</h2>'; 
+			break;
+		case "addSpeise":		
+			$input = Form::auslesen();
+			$neuesRezept=$_POST['infield'];
+			echo $neuesRezept;
+			$db = new DB_Functions();
+			$db->addSpeise($input, $neuesRezept);
+			break;
+			
+		case 'newSpeise':
+			$input = Form::auslesen();
+			break;
+	}			
+
 ?>
+
 <!DOCTYPE html>
 <html lang="de" 
 	<?php
+	$ergebnisse= null;
+	$index=0;
+	
 	if($ergebnisse[$index]['flickr'] == null) {
 		$ergebnisse[$index]['flickr'] = '6122735488';
 	}
@@ -34,7 +52,7 @@
 		background-size: cover;"';
 	$author = $flickr->getAuthor();
 	?>
->
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -57,10 +75,15 @@
 	<div class="container">
 		<div class="row">			
 			<div class="col-md-8 col-md-offset-2 panel" style="padding:20px">
-				<h1>Rezeptvorschlag</h1>
+				<h1>Rezeptvorschlag</h1> 
 				<?php
-					echo $idee;					
-					Form::create($input);
+					if($aktion=='newSpeise') {
+						Submit::createField($input);
+						//print_r($input);
+					} else {
+						echo $idee;
+						Form::create($input);
+					}
 				?>
 				<hr>
 				<p><small><a href="<?php echo $author['linkPicture']; ?>">Background picture by <?php echo $author['username']; ?> @flickr</a>. Used under Creative Commons - Attribution.</small></p>
@@ -75,5 +98,7 @@
 	<!-- Bootstrap select -->
 	<script type="text/javascript" src="select/js/bootstrap-select.min.js"></script>
 	<script>$('.selectpicker').selectpicker();</script>
+	
+	
   </body>
 </html>
