@@ -52,7 +52,7 @@ class Hamming {
 		$this->data = $db->getSpeisen();
 	}
 	
-	public function run($input, $anzahl = 5){
+	public function run($input, $anzahl = 10){
 		$summeGewichtung = 0;
 		foreach(Hamming::$attribute as $attribut) {
 			$summeGewichtung += $attribut['wert'];
@@ -79,6 +79,7 @@ class Hamming {
 			$ergebnisse[$i]['wert'] = round($result[$i],2);
 			$ergebnisse[$i]['flickr'] = $this->data[$i]['flickr'];
 			$ergebnisse[$i]['id'] = $this->data[$i]['id'];
+			$ergebnisse[$i]['beliebt']= $this->data[$i]['beliebt'];
 		}
 		return $ergebnisse;
 	}

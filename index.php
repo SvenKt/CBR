@@ -14,25 +14,36 @@
 	$idee = "";
 	// Gibt es Daten vom Formular?
 	$aktion = Form::datenGesendet();
-	
+	$ergebnisse= null;
+	$index=0;
 	switch ($aktion){
 		case "up":
 			$db_obj=new DB_Functions();
 			$id=$_POST['id'];
 			$sql="UPDATE ".DB_TABLE. ' SET beliebt=beliebt + 1 WHERE id='.$id.";";
 			mysql_query($sql);
-			echo $sql;
 			break;
 		case "down": 
 			$db_obj=new DB_Functions();
 			$id=$_POST['id'];
 			$sql="UPDATE ".DB_TABLE. ' SET beliebt= beliebt - 1 WHERE id='.$id.";";
-			echo $sql;
 			mysql_query($sql);
 			break;
 		case "hamming":
 			$input = Form::auslesen();
 			$ergebnisse = $hamming->run($input);
+			
+			$array_bel = array();
+			$array_name = array();
+			 foreach($ergebnisse as $ergs){
+			  array_push($array_bel,$ergs['beliebt']);
+			 }
+			  foreach($ergebnisse as $ergs){
+			  array_push($array_name,$ergs['speise']);
+			 }
+			 
+			 array_multisort($ergebnisse,SORT_ASC,$array_bel);
+		
 			$index = rand(0,4);
 			$idee = '<h2>Unsere Idee: '.$ergebnisse[$index]['speise'].'</h2>'; 
 			$id = $ergebnisse[$index]['id'];
@@ -54,8 +65,7 @@
 <!DOCTYPE html>
 <html lang="de" 
 	<?php
-	$ergebnisse= null;
-	$index=0;
+	
 	
 	if($ergebnisse[$index]['flickr'] == null) {
 		$ergebnisse[$index]['flickr'] = '6122735488';
