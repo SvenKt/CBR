@@ -23,7 +23,6 @@ env:
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
   - mysql -e "create database IF NOT EXISTS speisen;" -uroot;
-  - mysql -e "CREATE TABLE IF NOT EXISTS `rezept` (`id` int(11) NOT NULL, `warm` int(11) DEFAULT NULL, `zeit` int(11) DEFAULT NULL, `personen` int(11) DEFAULT NULL, `gesund` int(11) DEFAULT NULL, `hunger` int(11) DEFAULT NULL, `vegetarisch` int(11) DEFAULT NULL, `kochen` int(11) DEFAULT NULL, `ergebnis` varchar(40) DEFAULT NULL, `flickr` varchar(50) DEFAULT NULL, PRIMARY KEY (`id`))" -uroot;
 
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use
