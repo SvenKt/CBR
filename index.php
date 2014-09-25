@@ -4,8 +4,11 @@
 	include 'form.php';
 	include 'flickr.php';
 	
+	//noch keine Formulardaten
 	$input = null;
+	//neues Hamming Objekt
 	$hamming = new Hamming();
+	//rezeptidee leer
 	$idee = "";
 	// Gibt es Daten vom Formular?
 	if (Form::datenGesendet()){
@@ -13,11 +16,6 @@
 		$ergebnisse = $hamming->run($input);
 		$index = rand(0,4);
 		$idee = '<h2>Unsere Idee: '.$ergebnisse[$index]['speise'].'</h2>';
-		//echo $index;
-		/*
-		foreach($ergebnisse as $ergebnis) {
-			echo $ergebnis['speise'].' '.$ergebnis['wert'].'<br>';
-		}*/
 	}				
 ?>
 <!DOCTYPE html>

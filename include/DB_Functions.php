@@ -20,7 +20,8 @@ class DB_Functions {
 	
 	public function getSpeisen() {
 		$sql = "SELECT * FROM ".DB_TABLE;
-		$result = mysql_query($sql);
+		//$result = mysql_query($sql) or die ("Fehler");
+		$result = mysql_query($sql);// or die ("Fehler");
 		$speisen = null;
 		while($row = mysql_fetch_assoc($result)) {
 			$speisen[] = $row;
