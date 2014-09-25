@@ -23,7 +23,6 @@
 		case "addSpeise":		
 			$input = Form::auslesen();
 			$neuesRezept=$_POST['infield'];
-			echo $neuesRezept;
 			$db = new DB_Functions();
 			$db->addSpeise($input, $neuesRezept);
 			break;
