@@ -27,24 +27,31 @@
 			$db_obj=new DB_Functions();
 			$id=$_POST['id'];
 			$sql="UPDATE ".DB_TABLE. ' SET beliebt= beliebt - 1 WHERE id='.$id.";";
-			mysql_query($sql);
-			break;
+			mysql_query($sql);	
 		case "hamming":
+			if($aktion == 'down'){
+			
+					$input['warm']=$_POST['0'];
+					$input['zeit']=$_POST['1'];
+					$input['personen']=$_POST['2'];
+					$input['gesund']=$_POST['3'];
+					$input['hunger']=$_POST['4'];
+					$input['vegetarisch']=$_POST['5'];
+					$input['kochen']=$_POST['6'];
+				
+			} else{
 			$input = Form::auslesen();
+			}
 			$ergebnisse = $hamming->run($input);
 			
-			$array_bel = array();
-			$array_name = array();
-			 foreach($ergebnisse as $ergs){
-			  array_push($array_bel,$ergs['beliebt']);
-			 }
-			  foreach($ergebnisse as $ergs){
-			  array_push($array_name,$ergs['speise']);
-			 }
-			 
-			 array_multisort($ergebnisse,SORT_ASC,$array_bel);
+			usort($ergebnisse, function($a, $b) {
+			return $a['beliebt'] - $b['beliebt'];
+			});
 		
-			$index = rand(0,4);
+			//print_r($ergebnisse);
+
+
+			$index = rand(5,9);
 			$idee = '<h2>Unsere Idee: '.$ergebnisse[$index]['speise'].'</h2>'; 
 			$id = $ergebnisse[$index]['id'];
 			break;
@@ -105,11 +112,16 @@
 				<?php
 					if($aktion=='newSpeise') {
 						Submit::createField($input);
-						//print_r($input);
 					} else {
-						if($aktion == 'hamming') {
+						if(($aktion == 'hamming')|| ($aktion == 'down')) {
 						  echo'<form action="index.php" method="post">';
 						  echo'<input type="hidden" value='.$id.' name="id">';
+							$c=0;
+							if (is_array($input)){
+							foreach ($input as $val){
+						   echo'<input type="hidden" value='.$val.' name='.$c.'>';
+						   $c+=1;
+							}}
 							echo'	<table width=100%>
 									<tr>
 										<td width=85%>';echo $idee;
