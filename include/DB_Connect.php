@@ -2,17 +2,7 @@
  
 class DB_Connect {
  
-    // constructor
-    function __construct() {
-         
-    }
- 
-    // destructor
-    function __destruct() {
-        // $this->close();
-    }
- 
-    // Connecting to database
+	// Connecting to database
     public function connect() {
         require_once 'include/config.php';
         // connecting to mysql
