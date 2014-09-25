@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Erstellungszeit: 25. Sep 2014 um 12:32
+-- Erstellungszeit: 25. Sep 2014 um 12:45
 -- Server Version: 5.5.16
 -- PHP-Version: 5.3.8
 
@@ -90,11 +90,11 @@ INSERT INTO `rezept` (`id`, `warm`, `zeit`, `personen`, `gesund`, `hunger`, `veg
 (43, 1, 1, 1, 1, 1, 1, 1, 'spanische Paella', '12533718105'),
 (44, 0, 1, 0, 0, 0, 0, 1, 'Datteln im Speckmantel', '12255513543'),
 (45, 0, 0, 1, 1, 0, 1, 1, 'Gazpacho', '2824332804'),
-(46, 1, 0, 0, 1, 0, 1, 1, 'Minestrone', NULL),
-(47, 1, 0, 0, 1, 0, 0, 0, 'leichte Hühnerbrühe', NULL),
-(48, 0, 0, 1, 1, 0, 1, 1, 'Couscous', NULL),
-(49, 1, 1, 0, 1, 1, 0, 0, 'gegrilltes Hähnchenfilet', NULL),
-(50, 1, 0, 0, 0, 1, 0, 0, 'Türkische Pizza mit Salat', NULL);
+(46, 1, 0, 0, 1, 0, 1, 1, 'Minestrone', '4309005328'),
+(47, 1, 0, 0, 1, 0, 0, 0, 'leichte Hühnerbrühe', '8347114335'),
+(48, 0, 0, 1, 1, 0, 1, 1, 'Couscous', '4429274459'),
+(49, 1, 1, 0, 1, 1, 0, 0, 'gegrilltes Hähnchenfilet', '7520970416'),
+(50, 1, 0, 0, 0, 1, 0, 0, 'Türkische Pizza mit Salat', '4029896104');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
