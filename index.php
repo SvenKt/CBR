@@ -11,6 +11,8 @@
 	//rezeptidee leer
 	$idee = "";
 	// Gibt es Daten vom Formular?
+	$ergebnisse = null;
+	$index = 0;
 	if (Form::datenGesendet()){
 		$input = Form::auslesen();
 		$ergebnisse = $hamming->run($input);
