@@ -12,12 +12,7 @@ class DB_Functions {
         $this->db = new DB_Connect();
         $this->db->connect();
     }
- 
-    // destructor
-    function __destruct() {
-         
-    }
-	
+     
 	public function getSpeisen() {
 		$sql = "SELECT * FROM ".DB_TABLE;
 		//$result = mysql_query($sql) or die ("Fehler");
