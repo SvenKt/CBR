@@ -34,7 +34,7 @@ class DB_Functions {
 		foreach(Hamming::$attribute as $attribut) {
 			$sql.=$input[$attribut['spalte']]." , ";
 		}
-		$sql.="'".$neuesRezept."'".",NULL);";
+		$sql.="'".$neuesRezept."'".",NULL,1);";
 		mysql_query($sql);
 	}
 }	

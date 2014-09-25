@@ -80,7 +80,22 @@
 						Submit::createField($input);
 						//print_r($input);
 					} else {
-						echo $idee;
+					  echo'<form action="index.php" method="post">
+							<table width=100%>
+								<tr>
+									<td width=85%>';echo $idee;
+							  echo' </td>
+									<td width=15%>';
+							  echo '<button type="button" class="btn btn-default btn-lg" name="thumb_up">
+									<span class="glyphicon glyphicon-thumbs-up"></span>
+									</button>
+									<button type="button" class="btn btn-default btn-lg" name="thumb_down">
+									<span class="glyphicon glyphicon-thumbs-down"></span>
+									</button>';
+							  echo' </td>
+								</tr>
+							</table>
+							</form>';
 						Form::create($input);
 					}
 				?>
