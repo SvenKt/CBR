@@ -30,12 +30,12 @@ class DB_Functions {
 	}
 	
 	public function addSpeise($input, $neuesRezept){
-		$sql = "INSERT INTO ".DB_TABLE." VALUES (";
+		$sql = "INSERT INTO ".DB_TABLE." VALUES (NULL, ";
 		foreach(Hamming::$attribute as $attribut) {
 			$sql.=$input[$attribut['spalte']]." , ";
 		}
-		$sql.=$neuesRezept.");";
-		echo $sql;
+		$sql.="'".$neuesRezept."'".",NULL);";
+		mysql_query($sql);
 	}
 }	
 ?>
