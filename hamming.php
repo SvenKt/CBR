@@ -35,9 +35,9 @@ class Hamming {
 		),
 		array(
 			'spalte' => 'vegetarisch',
-			'title' => "Was Vegetarisches?", 
+			'title' => "Vielleicht veggie?", 
 			"select" => array('jo', 'Bäh, nein danke!'),
-			'wert' => 1
+			'wert' => 2
 		),
 		array(
 			'spalte' => 'kochen',
