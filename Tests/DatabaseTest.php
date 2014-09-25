@@ -1,6 +1,6 @@
 <?php
-include '../include/DB_Functions.php';
-include '../hamming.php';
+include 'include/DB_Functions.php';
+include 'hamming.php';
 class DatabaseTest extends PHPUnit_Framework_TestCase {
 	public function testInsert() {
 		$input = null;
