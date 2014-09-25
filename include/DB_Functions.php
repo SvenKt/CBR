@@ -36,6 +36,12 @@ class DB_Functions {
 		}
 		$sql.="'".$neuesRezept."'".",NULL,1);";
 		mysql_query($sql);
+		return mysql_query($sql);
+	}
+	
+	public function createTable() {
+		$sql = "CREATE TABLE IF NOT EXISTS `rezept` (`id` int(11) NOT NULL AUTO_INCREMENT, `warm` int(11) DEFAULT NULL, `zeit` int(11) DEFAULT NULL, `personen` int(11) DEFAULT NULL, `gesund` int(11) DEFAULT NULL, `hunger` int(11) DEFAULT NULL, `vegetarisch` int(11) DEFAULT NULL, `kochen` int(11) DEFAULT NULL, `ergebnis` varchar(40) DEFAULT NULL, `flickr` varchar(50) DEFAULT NULL, beliebt int(11) DEFAULT 0, PRIMARY KEY (`id`))";
+		return mysql_query($sql);
 	}
 }	
 ?>
