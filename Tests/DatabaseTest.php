@@ -17,10 +17,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 	public function testGetSpeisen(){
 		$db = new DB_Functions();
 		$speisen = $db->getSpeisen();
-		
-		// Sind 2 Speisen angekommen?
-		$this->assertCount(2, $speisen);
-		
+				
 		// Check alle Hammingattribute:
 		foreach(Hamming::$attribute as $attribut) {
 			$this->assertEquals(0, $speisen[0][$attribut['spalte']]);
