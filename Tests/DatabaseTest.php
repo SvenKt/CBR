@@ -4,14 +4,17 @@ include 'hamming.php';
 class DatabaseTest extends PHPUnit_Framework_TestCase {
 	public function testInsert() {
 		$db = new DB_Functions();
-		$this->assertTrue($db->createTable(), 'Tabelle konnte nicht erstellt werden');
-		$input = null;
-		foreach(Hamming::$attribute as $attribut) {
-			$input_0[$attribut['spalte']] = 0;
-			$input_1[$attribut['spalte']] = 1;
-		}	
-		$this->assertTrue($db->addSpeise($input_0, "null"), 'Speisen konnten nicht hinzugefügt werden.');
-		$this->assertTrue($db->addSpeise($input_1, "eins"), 'Speisen konnten nicht hinzugefügt werden.');
+		// es soll nur einmal addSpeise aufgerufen werden:
+		if($db->getSpeisen() != null) {
+			$this->assertTrue($db->createTable(), 'Tabelle konnte nicht erstellt werden');
+			$input = null;
+			foreach(Hamming::$attribute as $attribut) {
+				$input_0[$attribut['spalte']] = 0;
+				$input_1[$attribut['spalte']] = 1;
+			}	
+			$this->assertTrue($db->addSpeise($input_0, "null"), 'Speisen konnten nicht hinzugefügt werden.');
+			$this->assertTrue($db->addSpeise($input_1, "eins"), 'Speisen konnten nicht hinzugefügt werden.');
+		};
 	}
 	
 	public function testGetSpeisen(){
