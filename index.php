@@ -28,29 +28,15 @@
 			$id=$_POST['id'];
 			$sql="UPDATE ".DB_TABLE. ' SET beliebt= beliebt - 1 WHERE id='.$id.";";
 			mysql_query($sql);	
+			break;
 		case "hamming":
-			if($aktion == 'down'){
-			
-					$input['warm']=$_POST['0'];
-					$input['zeit']=$_POST['1'];
-					$input['personen']=$_POST['2'];
-					$input['gesund']=$_POST['3'];
-					$input['hunger']=$_POST['4'];
-					$input['vegetarisch']=$_POST['5'];
-					$input['kochen']=$_POST['6'];
-				
-			} else{
 			$input = Form::auslesen();
-			}
 			$ergebnisse = $hamming->run($input);
 			
 			usort($ergebnisse, function($a, $b) {
-			return $a['beliebt'] - $b['beliebt'];
+				return $a['beliebt'] - $b['beliebt'];
 			});
 		
-			//print_r($ergebnisse);
-
-
 			$index = rand(5,9);
 			$idee = '<h2>Unsere Idee: '.$ergebnisse[$index]['speise'].'</h2>'; 
 			$id = $ergebnisse[$index]['id'];
