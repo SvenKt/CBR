@@ -4,6 +4,7 @@
 	include 'form.php';
 	include 'flickr.php';
 	include 'submit.php';
+	include 'include/config.php';
 	
 	//noch keine Formulardaten
 	$input = null;
@@ -13,12 +14,32 @@
 	$idee = "";
 	// Gibt es Daten vom Formular?
 	$aktion = Form::datenGesendet();
+	$ergebnisse= null;
+	$index=0;
 	switch ($aktion){
+		case "up":
+			$db_obj=new DB_Functions();
+			$id=$_POST['id'];
+			$sql="UPDATE ".DB_TABLE. ' SET beliebt=beliebt + 1 WHERE id='.$id.";";
+			mysql_query($sql);
+			break;
+		case "down": 
+			$db_obj=new DB_Functions();
+			$id=$_POST['id'];
+			$sql="UPDATE ".DB_TABLE. ' SET beliebt= beliebt - 1 WHERE id='.$id.";";
+			mysql_query($sql);	
+			break;
 		case "hamming":
 			$input = Form::auslesen();
 			$ergebnisse = $hamming->run($input);
-			$index = rand(0,4);
+			
+			usort($ergebnisse, function($a, $b) {
+				return $a['beliebt'] - $b['beliebt'];
+			});
+		
+			$index = rand(5,9);
 			$idee = '<h2>Unsere Idee: '.$ergebnisse[$index]['speise'].'</h2>'; 
+			$id = $ergebnisse[$index]['id'];
 			break;
 		case "addSpeise":		
 			$input = Form::auslesen();
@@ -37,8 +58,7 @@
 <!DOCTYPE html>
 <html lang="de" 
 	<?php
-	$ergebnisse= null;
-	$index=0;
+	
 	
 	if($ergebnisse[$index]['flickr'] == null) {
 		$ergebnisse[$index]['flickr'] = '6122735488';
@@ -78,9 +98,32 @@
 				<?php
 					if($aktion=='newSpeise') {
 						Submit::createField($input);
-						//print_r($input);
 					} else {
-						echo $idee;
+						if(($aktion == 'hamming')|| ($aktion == 'down')) {
+						  echo'<form action="index.php" method="post">';
+						  echo'<input type="hidden" value='.$id.' name="id">';
+							$c=0;
+							if (is_array($input)){
+							foreach ($input as $val){
+						   echo'<input type="hidden" value='.$val.' name='.$c.'>';
+						   $c+=1;
+							}}
+							echo'	<table width=100%>
+									<tr>
+										<td width=85%>';echo $idee;
+								  echo' </td>
+										<td width=15%>';
+								  echo '<button type="submit" class="btn btn-default btn-lg" name="thumb_up">
+										<span class="glyphicon glyphicon-thumbs-up"></span>
+										</button>
+										<button type="submit" class="btn btn-default btn-lg" name="thumb_down">
+										<span class="glyphicon glyphicon-thumbs-down"></span>
+										</button>';
+								  echo' </td>
+									</tr>
+								</table>
+								</form>';
+						}
 						Form::create($input);
 					}
 				?>

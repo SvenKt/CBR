@@ -12,12 +12,7 @@ class DB_Functions {
         $this->db = new DB_Connect();
         $this->db->connect();
     }
- 
-    // destructor
-    function __destruct() {
-         
-    }
-	
+     
 	public function getSpeisen() {
 		$sql = "SELECT * FROM ".DB_TABLE;
 		//$result = mysql_query($sql) or die ("Fehler");
@@ -34,7 +29,7 @@ class DB_Functions {
 		foreach(Hamming::$attribute as $attribut) {
 			$sql.=$input[$attribut['spalte']]." , ";
 		}
-		$sql.="'".$neuesRezept."'".",NULL,1);";
+		$sql.="'".$neuesRezept."',NULL,1);";
 		return mysql_query($sql);
 	}
 	

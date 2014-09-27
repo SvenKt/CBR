@@ -31,6 +31,12 @@ class Form {
 	public static function datenGesendet(){
 		
 		if($_SERVER['REQUEST_METHOD'] === 'POST'){
+			if(isset($_POST['thumb_up'])){
+				return "up";
+			}
+			if(isset($_POST['thumb_down'])){
+				return "down";
+			}
 			if(isset($_POST['addSpeise'])){
 				return "addSpeise";
 			}
