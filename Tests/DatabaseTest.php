@@ -3,12 +3,12 @@ include 'include/DB_Functions.php';
 include 'hamming.php';
 class DatabaseTest extends PHPUnit_Framework_TestCase {
 	/**
-     * @beforeClass
+     * @before
      */
 	public function testInsert() {
 		$db = new DB_Functions();
 		// es soll nur einmal addSpeise aufgerufen werden:
-		if($db->getSpeisen() != null) {
+		if($db->getSpeisen() == null) {
 			$this->assertTrue($db->createTable(), 'Tabelle konnte nicht erstellt werden');
 			$input = null;
 			foreach(Hamming::$attribute as $attribut) {
@@ -23,13 +23,15 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 	public function testGetSpeisen(){
 		$db = new DB_Functions();
 		$speisen = $db->getSpeisen();
-				
+
+		$this->assertNotNull($speisen, "keine Speisen bekommen");
+			
 		// Check alle Hammingattribute:
 		foreach(Hamming::$attribute as $attribut) {
 			$this->assertEquals(0, $speisen[0][$attribut['spalte']]);
 			$this->assertEquals(1, $speisen[1][$attribut['spalte']]);
 		}
-		
+
 		//Check ergebnis
 		$this->assertEquals('null', $speisen[0]['ergebnis']);
 		$this->assertEquals('eins', $speisen[1]['ergebnis']);

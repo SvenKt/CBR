@@ -1,19 +1,19 @@
 <?php
  
 class DB_Connect {
- 
+	public $con;
 	// Connecting to database
     public function connect() {
         require_once 'include/config.php';
         // connecting to mysql
-        $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+        $this->con = new mysqli(DB_HOST, DB_USER, DB_PASSWORD);
 		// set charset to utf8
-		mysql_set_charset('utf8');
+		$this->con->set_charset('utf8');
         // selecting database
-        mysql_select_db(DB_DATABASE);
+        $this->con->select_db(DB_DATABASE);
  
         // return database handler
-        return $con;
+        return $this->con;
     }
  
     // Closing database connection
