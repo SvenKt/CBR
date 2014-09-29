@@ -2,10 +2,11 @@
 include 'include/DB_Functions.php';
 include 'hamming.php';
 class DatabaseTest extends PHPUnit_Framework_TestCase {
+	
 	/**
-     * @beforeClass
+     * @before
      */
-	public static function testInsert() {
+	public function testInsert() {
 		$db = new DB_Functions();
 		// es soll nur einmal addSpeise aufgerufen werden:
 		if($db->getSpeisen() != null) {
