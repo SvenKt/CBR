@@ -25,19 +25,14 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 		$db = new DB_Functions();
 		$speisen = $db->getSpeisen();
 		$this->assertNotNull($speisen, "keine Speisen bekommen");
-		print_r($speisen);
-		$this->expectOutputString('');
 				
 		// Check alle Hammingattribute:
 		foreach(Hamming::$attribute as $attribut) {
 			$this->assertEquals(0, $speisen[0][$attribut['spalte']]);
 			$this->assertEquals(1, $speisen[1][$attribut['spalte']]);
 		}
-		
-		//Check ergebnis
-		/*
+				
 		$this->assertEquals('null', $speisen[0]['ergebnis']);
 		$this->assertEquals('eins', $speisen[1]['ergebnis']);
-		*/
 	}
 }
