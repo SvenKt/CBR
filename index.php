@@ -141,6 +141,30 @@
 	<script type="text/javascript" src="select/js/bootstrap-select.min.js"></script>
 	<script>$('.selectpicker').selectpicker();</script>
 	
+	<script>
+		$(document).ready(function(){
+			$("form#anfrage").submit(function(){
+				$.ajax({
+					url:"ajax/getSpeise.php",
+					type:"POST",
+					async:false,
+					dataType:"json",
+					data:$("form#anfrage").serialize(),
+					success:function(result){
+						var data = new Object();
+						$("h2").html("Unsere Idee: " + result["speise"]);
+						$("html").css('background', "url('" + result['url'] + "') no-repeat center center fixed");
+						$("html").css('-webkit-background-size', 'cover');
+						$("html").css('-moz-background-size', 'cover');
+						$("html").css('-o-background-size', 'cover');
+						$("html").css('background-size', 'cover');
+					}
+				});
+				// Submit wird beendet, Seite wird nicht neu geladen
+				return false;
+			});
+		});
+	</script>
 	
   </body>
 </html>

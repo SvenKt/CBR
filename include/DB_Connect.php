@@ -4,7 +4,7 @@ class DB_Connect {
 	public $con;
 	// Connecting to database
     public function connect() {
-        require_once 'include/config.php';
+        require_once 'config.php';
         // connecting to mysql
         $this->con = new mysqli(DB_HOST, DB_USER, DB_PASSWORD);
 		// set charset to utf8
