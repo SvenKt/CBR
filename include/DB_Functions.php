@@ -19,7 +19,7 @@ class DB_Functions {
 		//$result = mysql_query($sql) or die ("Fehler");
 		$result = $this->con->query($sql);// or die ("Fehler");
 		$speisen = null;
-		while($row = mysqli_fetch_assoc($result)) {
+		while($row = $this->con->fetch_assoc($result)) {
 			$speisen[] = $row;
 		}
 		return $speisen;
