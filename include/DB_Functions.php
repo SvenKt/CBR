@@ -18,10 +18,8 @@ class DB_Functions {
 		$sql = "SELECT * FROM ".DB_TABLE;
 		$result = $this->con->query($sql);// or die ("Fehler");
 		$speisen = null;
-		if($result->num_rows > 0) {
-			while($row = $result->fetch_assoc()) {
-				$speisen[] = $row;
-			}
+		while($row = $result->fetch_assoc()) {
+			$speisen[] = $row;
 		}
 		return $speisen;
 	}
