@@ -5,7 +5,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 	/**
      * @beforeClass
      */
-	public function testInsert() {
+	public static function testInsert() {
 		$db = new DB_Functions();
 		// es soll nur einmal addSpeise aufgerufen werden:
 		if($db->getSpeisen() != null) {
@@ -30,7 +30,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 		// Check alle Hammingattribute:
 		foreach(Hamming::$attribute as $attribut) {
 			$this->assertEquals(0, $speisen[0][$attribut['spalte']]);
-			$this->assertEquals(0, $speisen[1][$attribut['spalte']]);
+			$this->assertEquals(1, $speisen[1][$attribut['spalte']]);
 		}
 		
 		//Check ergebnis
