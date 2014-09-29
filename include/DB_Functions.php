@@ -18,7 +18,7 @@ class DB_Functions {
 		$sql = "SELECT * FROM ".DB_TABLE;
 		$this->con->query($sql);// or die ("Fehler");
 		$speisen = null;
-		if($this->con->num_rows > 0) {
+		if($this->con->num_rows() > 0) {
 			while($row = $this->con->fetch_assoc()) {
 				$speisen[] = $row;
 			}
