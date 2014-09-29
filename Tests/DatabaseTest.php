@@ -23,6 +23,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 	public function testGetSpeisen(){
 		$db = new DB_Functions();
 		$speisen = $db->getSpeisen();
+		print_r($speisen);
 				
 		// Check alle Hammingattribute:
 		foreach(Hamming::$attribute as $attribut) {
