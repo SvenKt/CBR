@@ -9,7 +9,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 	public function testInsert() {
 		$db = new DB_Functions();
 		// es soll nur einmal addSpeise aufgerufen werden:
-		if($db->getSpeisen() != null) {
+		if($db->getSpeisen() == null) {
 			$this->assertTrue($db->createTable(), 'Tabelle konnte nicht erstellt werden');
 			$input = null;
 			foreach(Hamming::$attribute as $attribut) {
