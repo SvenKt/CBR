@@ -16,10 +16,9 @@ class DB_Functions {
      
 	public function getSpeisen() {
 		$sql = "SELECT * FROM ".DB_TABLE;
-		//$result = mysql_query($sql) or die ("Fehler");
-		$result = $this->con->query($sql);// or die ("Fehler");
+		$this->con->query($sql);// or die ("Fehler");
 		$speisen = null;
-		while($row = $this->con->fetch_assoc($result)) {
+		while($row = $this->con->fetch_assoc()) {
 			$speisen[] = $row;
 		}
 		return $speisen;
