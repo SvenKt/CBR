@@ -6,11 +6,11 @@ class DB_Connect {
     public function connect() {
         require_once 'include/config.php';
         // connecting to mysql
-        $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+        $con = mysqli(DB_HOST, DB_USER, DB_PASSWORD);
 		// set charset to utf8
-		mysql_set_charset('utf8');
+		mysqli_set_charset('utf8');
         // selecting database
-        mysql_select_db(DB_DATABASE);
+        mysqli_select_db (DB_DATABASE);
  
         // return database handler
         return $con;
