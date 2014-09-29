@@ -23,6 +23,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 	public function testGetSpeisen(){
 		$db = new DB_Functions();
 		$speisen = $db->getSpeisen();
+		$this->assertNotNull($speisen, "keine Speisen bekommen");
 		print_r($speisen);
 		$this->expectOutputString('');
 				
