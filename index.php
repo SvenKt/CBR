@@ -29,18 +29,6 @@
 			$sql="UPDATE ".DB_TABLE. ' SET beliebt= beliebt - 1 WHERE id='.$id.";";
 			mysql_query($sql);	
 			break;
-		case "hamming":
-			$input = Form::auslesen();
-			$ergebnisse = $hamming->run($input);
-			
-			usort($ergebnisse, function($a, $b) {
-				return $a['beliebt'] - $b['beliebt'];
-			});
-		
-			$index = rand(5,9);
-			$idee = '<h2>Unsere Idee: '.$ergebnisse[$index]['speise'].'</h2>'; 
-			$id = $ergebnisse[$index]['id'];
-			break;
 		case "addSpeise":		
 			$input = Form::auslesen();
 			$neuesRezept=$_POST['infield'];
@@ -56,22 +44,8 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="de" 
-	<?php
+<html lang="de">
 	
-	
-	if($ergebnisse[$index]['flickr'] == null) {
-		$ergebnisse[$index]['flickr'] = '6122735488';
-	}
-	$flickr = new Flickr($ergebnisse[$index]['flickr']);
-	echo 'style="background: url('.$flickr->getImage().') no-repeat center center fixed; 
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;"';
-	$author = $flickr->getAuthor();
-	?>
-
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -91,6 +65,11 @@
     <![endif]-->
   </head>
   <body>
+	<div id="wrap">
+		<div class="background"></div>
+		<div class="background"></div>
+	</div>
+	<div style="display:hidden;"><img class="hidden" /></div>
 	<div class="container">
 		<div class="row">			
 			<div class="col-md-8 col-md-offset-2 panel" style="padding:20px">
@@ -123,12 +102,14 @@
 									</tr>
 								</table>
 								</form>';
+						} else {
+							echo '<h2></h2>';
 						}
 						Form::create($input);
 					}
 				?>
 				<hr>
-				<p><small><a href="<?php echo $author['linkPicture']; ?>">Background picture by <?php echo $author['username']; ?> @flickr</a>. Used under Creative Commons - Attribution.</small></p>
+				<p><small><a id="linkPicture" href="#">Background picture by <span id="author"></span> @flickr</a>. Used under Creative Commons - Attribution.</small></p>
 			</div>
 		</div>		
 	</div>
@@ -141,30 +122,6 @@
 	<script type="text/javascript" src="select/js/bootstrap-select.min.js"></script>
 	<script>$('.selectpicker').selectpicker();</script>
 	
-	<script>
-		$(document).ready(function(){
-			$("form#anfrage").submit(function(){
-				$.ajax({
-					url:"ajax/getSpeise.php",
-					type:"POST",
-					async:false,
-					dataType:"json",
-					data:$("form#anfrage").serialize(),
-					success:function(result){
-						var data = new Object();
-						$("h2").html("Unsere Idee: " + result["speise"]);
-						$("html").css('background', "url('" + result['url'] + "') no-repeat center center fixed");
-						$("html").css('-webkit-background-size', 'cover');
-						$("html").css('-moz-background-size', 'cover');
-						$("html").css('-o-background-size', 'cover');
-						$("html").css('background-size', 'cover');
-					}
-				});
-				// Submit wird beendet, Seite wird nicht neu geladen
-				return false;
-			});
-		});
-	</script>
-	
+	<script type="text/javascript" src="ajax/ajax.js"></script>
   </body>
 </html>
