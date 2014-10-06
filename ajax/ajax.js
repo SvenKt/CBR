@@ -1,3 +1,9 @@
+// Variablen für das Voting
+var speise = -1;
+var vote = 0;
+// Voting am Anfang off:
+$(".voting").hide()
+
 function changeBackground(img, author, linkPicture) {
 	$("#wrap .background").eq(1).css('background', "url('" + img + "') no-repeat center center fixed");
 	$("#wrap .background").eq(1).css('-webkit-background-size', 'cover');
@@ -32,7 +38,12 @@ $(document).ready(function(){
 			success:function(result){
 				var data = new Object();
 				$("h2").html("Unsere Idee: " + result["speise"]);
+				// Daumen hoch und runter Buttons sollen nicht mehr active sein:
+				$(".voting>button.active").removeClass("active");
+				//	Voting an:
+				$(".voting").show()
 				getFlickr(result["flickr"]);
+				speise = result["id"];
 			}
 		});
 		// Submit wird beendet, Seite wird nicht neu geladen
@@ -58,4 +69,36 @@ function getFlickr(flickrId) {
 			changeBackground(result['url'], author['username'], author['linkPicture']);
 		}
 	});
+}
+
+function voting(wert) {
+	// Kein Buttons mehr active
+	$(".voting>button.active").removeClass("active");
+	
+	$.ajax({
+		url:"ajax/vote.php",
+		type:"POST",
+		async:true,
+		dataType:"json",
+		data:"speise="+speise + "&alt=" + vote + "&neu=" + wert,
+		success:function(result){
+			if(!result["success"]) {
+				alert(result["message"]);
+			}
+		}
+	});
+	
+	// Wenn Button das zweite mal hintereinander gedrückt wurde, dann ignorieren
+	if (wert != vote) {
+		var button;
+		if (wert == 1) {
+			button = "#thumb_up";
+		} else {
+			button = "#thumb_down";		
+		}
+		$(button).addClass('active');
+		vote = wert;
+	} else {
+		vote = 0;
+	}	
 }

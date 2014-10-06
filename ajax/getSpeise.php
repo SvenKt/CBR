@@ -18,6 +18,7 @@
 	$index = rand(5,9);
 	$result = null;
 		
+	$result['id'] = (int) $ergebnisse[$index]['id'];
 	$result['speise'] = $ergebnisse[$index]['speise'];
 	$result['flickr'] = $ergebnisse[$index]['flickr'];
 		

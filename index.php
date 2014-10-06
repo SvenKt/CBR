@@ -103,7 +103,12 @@
 								</table>
 								</form>';
 						} else {
-							echo '<h2></h2>';
+							echo '<h2 class="pull-left"></h2><div class="pull-right voting"><button onClick="voting(1)" class="btn btn-default btn-lg" id="thumb_up">
+										<span class="glyphicon glyphicon-thumbs-up"></span>
+										</button>
+										<button onClick="voting(-1)" class="btn btn-default btn-lg" id="thumb_down">
+										<span class="glyphicon glyphicon-thumbs-down"></span>
+										</button></div><div class="clearfix"></div>';
 						}
 						Form::create($input);
 					}
