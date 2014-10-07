@@ -31,7 +31,7 @@ class DB_Functions {
 		foreach(Hamming::$attribute as $attribut) {
 			$sql.=$input[$attribut['spalte']]." , ";
 		}
-		$sql.="'".$neuesRezept."',NULL,1);";
+		$sql.="'".$neuesRezept."',NULL,0);";
 		return $this->con->query($sql);
 	}
 	

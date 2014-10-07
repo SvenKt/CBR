@@ -28,7 +28,11 @@ function changeBackground(img, author, linkPicture) {
 $(document).ready(function(){
 	$("#wrap .background").hide();
 	getFlickr(0);
-	$("form#anfrage").submit(function(){
+	$('div#alert-speichern-success').hide();
+	$('div#alert-speichern').hide();
+	
+	$("button#hamming").click(function(){
+		$('div#alert-speichern-success').hide();
 		$.ajax({
 			url:"ajax/getSpeise.php",
 			type:"POST",
@@ -36,7 +40,6 @@ $(document).ready(function(){
 			dataType:"json",
 			data:$("form#anfrage").serialize(),
 			success:function(result){
-				var data = new Object();
 				$("h2").html("Unsere Idee: " + result["speise"]);
 				// Daumen hoch und runter Buttons sollen nicht mehr active sein:
 				$(".voting>button.active").removeClass("active");
@@ -49,6 +52,34 @@ $(document).ready(function(){
 		// Submit wird beendet, Seite wird nicht neu geladen
 		return false;
 	});
+	
+	$("button#addSpeise").click(function(){
+		$('div#alert-speichern-success').hide();
+		$.ajax({
+			url:"ajax/addSpeise.php",
+			type:"POST",
+			async:false,
+			dataType:"json",
+			data:$("form#anfrage").serialize()+"&speise="+$("input#neueSpeise").val(),
+			success:function(result){
+				if(!result['success']) {
+					$('div#alert-speichern').html(result['message']);
+					$('div#alert-speichern').show();
+					return false;
+				}
+				// Das Modal wieder schließen:
+				$('div#alert-speichern-success').html(result['message']);
+				$('div#alert-speichern-success').show();
+				$('#addSpeiseModal').modal('hide')
+			}
+		});
+	});
+	
+	// Wenn das addSpeiseModel geschlossen wird, wird die Fehlermeldung für das nächste Mal geschlossen und das Input-Feld geleert:
+	$('#addSpeiseModal').on('hidden.bs.modal', function (e) {
+		$('div#alert-speichern').hide();
+		$("input#neueSpeise").val('');
+	})
 });
 
 var flickrRequest = null;
