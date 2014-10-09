@@ -15,12 +15,7 @@ class DB_Connect {
         // return database handler
         return $this->con;
     }
- 
-    // Closing database connection
-    public function close() {
-        mysql_close();
-    }
- 
+
 }
  
 ?>
