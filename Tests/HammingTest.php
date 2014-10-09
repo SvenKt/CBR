@@ -1,5 +1,5 @@
 <?php
-include 'include/DB_Functions.php';
+//include 'include/DB_Functions.php';
 include 'hamming.php';
 class HammingTest extends PHPUnit_Framework_TestCase {
 	public function testHamming() {
