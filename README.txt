@@ -1,2 +1,2 @@
 Hallo Welt!
-(https://travis-ci.org/SvenKt/CBR.svg?branch=master)
+![Build Status](https://travis-ci.org/SvenKt/CBR.svg?branch=master)
