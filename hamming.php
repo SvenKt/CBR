@@ -74,6 +74,10 @@ class Hamming {
 		array_multisort($result, SORT_DESC, $this->data, SORT_ASC);
 		
 		$ergebnisse = array();
+		
+		// Wenn mehr verlangt als vorhanden, dann nur so viel wie da ist:
+		$anzahl = ($anzahl > count($this->data) ? : count($this->data) : $anzahl);
+		
 		for($i= 0 ; $i < $anzahl ; $i++ ) {
 			$ergebnisse[$i]['speise'] = $this->data[$i]['ergebnis'];
 			$ergebnisse[$i]['wert'] = round($result[$i],2);
