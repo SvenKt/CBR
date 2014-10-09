@@ -28,6 +28,7 @@ function changeBackground(img, author, linkPicture) {
 
 function getSpeise(){
 	$('div#alert-speichern-success').hide();
+	$(".voting>button.btn-success").removeClass("btn-success");
 	$.ajax({
 		url:"ajax/getSpeise.php",
 		type:"POST",
