@@ -1,5 +1,5 @@
 <?php
-include_once "../flickr.php";
+include_once 'flickr.php';
 
 class FlickrTest extends PHPUnit_Framework_TestCase {
 
