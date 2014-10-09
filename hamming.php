@@ -1,5 +1,5 @@
 <?php
-include 'include/DB_Functions.php';
+include_once 'include/DB_Functions.php';
 class Hamming {
 	private $data;
 	public static $attribute = array(
