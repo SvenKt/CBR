@@ -38,8 +38,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 	}	
 	
 	public function testChangeBeliebt(){
-		$db = new DB_Functions();
-		
+		$db = new DB_Functions();		
 		$this->assertTrue($db->changeBeliebt(1, 1));
 		$irgendneVariable = $db->getSpeisen();
 		$this->assertEquals(1, $irgendneVariable[0]['beliebt'], 'Beliebtheit nicht gestiegen');
