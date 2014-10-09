@@ -42,6 +42,8 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 		
 		$this->assertTrue($db->changeBeliebt(0, 1));
 		$irgendneVariable = $db->getSpeisen();
-		$this->assertEquals(1, $irgendneVariable[1]['beliebt'], 'Beliebtheit nicht gestiegen');
+        print_r($irgendneVariable);
+		$this->expectOutputString(''); // tell PHPUnit to expect '' as output		
+		$this->assertEquals(1, $irgendneVariable[0]['beliebt'], 'Beliebtheit nicht gestiegen');
 	}
 }
