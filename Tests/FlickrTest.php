@@ -12,6 +12,6 @@ class FlickrTest extends PHPUnit_Framework_TestCase {
 		$flickr = new Flickr(6122735488);
 		$author = $flickr->getAuthor();
 		$this->assertEquals('Jeff Kubina',$author['username'], 'Falschen/Keinen Author erhalten');
-		$this->assertEquals('https://www.flickr.com/photos/kubina/6122735488',$author['linkPicture'], 'Falsches/Kein linkPicture erhalten');
+		$this->assertEquals('https://www.flickr.com/photos/kubina/6122735488/',$author['linkPicture'], 'Falsches/Kein linkPicture erhalten');
 	}
 }
