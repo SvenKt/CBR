@@ -13,8 +13,8 @@
 
     <testsuites>
         <testsuite name="Hammingtest">
-            <file>Tests/HammingTest.php</file>
             <file>Tests/DatabaseTest.php</file>
+            <file>Tests/HammingTest.php</file>
         </testsuite>
     </testsuites>
 
