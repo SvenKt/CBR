@@ -9,11 +9,9 @@
 	$hamming = new Hamming();
 	$ergebnisse = $hamming->run($input);
 	
-	/*
 	usort($ergebnisse, function($a, $b) {
 		return $a['beliebt'] - $b['beliebt'];
 	});
-	*/
 
 	$index = rand(5,9);
 	$result = null;

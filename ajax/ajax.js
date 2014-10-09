@@ -25,30 +25,36 @@ function changeBackground(img, author, linkPicture) {
 	});
 }
 
+
+function getSpeise(){
+	$('div#alert-speichern-success').hide();
+	$.ajax({
+		url:"ajax/getSpeise.php",
+		type:"POST",
+		async:false,
+		dataType:"json",
+		data:$("form#anfrage").serialize(),
+		success:function(result){
+			$("h2").html("Unsere Idee: " + result["speise"]);
+			// Daumen hoch und runter Buttons sollen nicht mehr active sein:
+			$(".voting>button.active").removeClass("active");
+			//	Voting an:
+			$(".voting").show()
+			getFlickr(result["flickr"]);
+			speise = result["id"];
+		}
+	});
+}
+
 $(document).ready(function(){
 	$("#wrap .background").hide();
 	getFlickr(0);
 	$('div#alert-speichern-success').hide();
+	$('div#alert-voting-success').hide();
 	$('div#alert-speichern').hide();
 	
 	$("button#hamming").click(function(){
-		$('div#alert-speichern-success').hide();
-		$.ajax({
-			url:"ajax/getSpeise.php",
-			type:"POST",
-			async:false,
-			dataType:"json",
-			data:$("form#anfrage").serialize(),
-			success:function(result){
-				$("h2").html("Unsere Idee: " + result["speise"]);
-				// Daumen hoch und runter Buttons sollen nicht mehr active sein:
-				$(".voting>button.active").removeClass("active");
-				//	Voting an:
-				$(".voting").show()
-				getFlickr(result["flickr"]);
-				speise = result["id"];
-			}
-		});
+		getSpeise();
 		// Submit wird beendet, Seite wird nicht neu geladen
 		return false;
 	});
@@ -104,7 +110,9 @@ function getFlickr(flickrId) {
 
 function voting(wert) {
 	// Kein Buttons mehr active
-	$(".voting>button.active").removeClass("active");
+	$(".voting>button.btn-success").removeClass("btn-success");
+	// Kein Focus mehr
+	$(".voting>button").blur();
 	
 	$.ajax({
 		url:"ajax/vote.php",
@@ -119,6 +127,13 @@ function voting(wert) {
 		}
 	});
 	
+	$('div#alert-voting-success').slideDown(300).delay(3000).slideUp(300);
+	if (wert == -1){
+		getSpeise();
+		vote = wert;
+		return;
+	}
+	
 	// Wenn Button das zweite mal hintereinander gedrückt wurde, dann ignorieren
 	if (wert != vote) {
 		var button;
@@ -127,7 +142,7 @@ function voting(wert) {
 		} else {
 			button = "#thumb_down";		
 		}
-		$(button).addClass('active');
+		$(button).addClass('btn-success');
 		vote = wert;
 	} else {
 		vote = 0;

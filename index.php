@@ -29,6 +29,7 @@
 			<div class="col-md-8 col-md-offset-2 panel" style="padding:20px">
 				<h1>Rezeptvorschlag</h1>
 				<div class="alert alert-success" id="alert-speichern-success" role="alert"></div>
+				<div class="alert alert-success" id="alert-voting-success" role="alert">Danke für das Feedback.</div>
 				<h2 class="pull-left"></h2>
 				<div class="pull-right voting">
 					<button onClick="voting(1)" class="btn btn-default btn-lg" id="thumb_up">
